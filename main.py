@@ -15,7 +15,7 @@ ps = PorterStemmer()
 r = sr.Recognizer()
 
 
-names = ("naina","jessica","manjulika","chandramuki","anjali","paro")
+names = ("naina","jessica","anjali")
 end = ("goodbye","bye","bye bye","tata","goodnight","stop","bus","thank you")
 what = ("what","how")
 grocery = ("add","remove","show","clear","reset","grocery")
@@ -25,7 +25,8 @@ def end_func():
 
 def what_func(wh_tokens,noun_tokens):
     g = geocoder.ip('me')
-    response = requests.get("http://api.weatherapi.com/v1/current.json?key=175053f4c42643ae9bc54909212701&q="+g.city)
+    api_key="" #Add your api id from weatherapi.com
+    response = requests.get("http://api.weatherapi.com/v1/current.json?key="+api_key+"&q="+g.city)
     x = response.json()
     return ("The temperature is "+str(x["current"]["temp_c"])+" degree celcius and it is "+x["current"]["condition"]["text"]+" outside.")
 def grocery_func(verb,nouns):
@@ -95,8 +96,6 @@ def decide(command):
     verb_token = [tok for tok, tag in token_tag if tag in verb_tags]
     noun_tokens = [tok for tok,tag in token_tag if tag in noun_tags]
 
-    # if len(verb_token)>1:
-    #     return "This task is too complex for me"
     for key in actions:
         try:
             if verb_token[0] in key:
@@ -130,16 +129,15 @@ def listen():
 def main():
     print("HERE")
     while(1):
-        # start=listen()
-        start = "anjali"
+        start=listen()
         print(start)
         if(start in names):
             b.beep(sound=5)
             command = ""
             while(command!="goodbye"):
                 b.beep(sound=1)
-                # command=listen()
-                command = "what is the weather"
+                command=listen()
+                # command = "what is the weather"
                 print(command)
                 if(command == "unknown"):
                     speakText("Sorry I did not get you")
@@ -153,28 +151,6 @@ def main():
                     else:
                         print(msg)
                         speakText(msg)
-                # elif command in end:
-                #     continue
-                # else:
-                #     speakText(command)
-                #     msg=command.split(" ")
-                #     if(msg[0]=="play"):
-                #         print("play")
-                #         webbrowser.open('https://open.spotify.com/track/0tY8ZIArzjkH6dbXp42ohg?si=0jSgvO5sRcCTp_sFQszYbg')
-                #         command='goodbye'
-                #     elif msg[0]=='bus':
-                #         browserExe = "chrome.exe"
-                #         os. system("taskkill /f /im "+browserExe)
-                #         command='goodbye'
-                #     elif msg[0]=='add':
-                #         speakText("Adding "+msg[1]+" to grocery list")
-                #         f.write(msg[1]+"\n")
-                #     elif msg[0]=='grocery':
-                #         grocery=f1.read()
-                #         speakText("Your grocery list has "+grocery)
-                #     elif msg[0]=='remove':
-
-                    # speakText(add)
             speakText("Goodbye")
 
 main()
