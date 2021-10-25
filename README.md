@@ -1,5 +1,5 @@
-# Jessica
-Jessica is a personal voice assistant currently able to manage a grocery list and give weather information.
+# Voice Bot
+This is a personal voice assistant currently able to manage a grocery list and give weather information.
 
 Wake up the voice assistant by saying 'Jessica'.
 
