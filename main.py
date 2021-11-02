@@ -15,7 +15,7 @@ ps = PorterStemmer()
 r = sr.Recognizer()
 
 
-names = ("naina","jessica","anjali")
+names = ("jessica")
 end = ("goodbye","bye","bye bye","tata","goodnight","stop","bus","thank you")
 what = ("what","how")
 grocery = ("add","remove","show","clear","reset","grocery")
